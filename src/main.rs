@@ -1,4 +1,7 @@
 use clap::{Parser, Subcommand};
+use commands::{setup, update};
+
+pub mod commands;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -27,10 +30,7 @@ fn main() {
         SubCommand::Init {
             repository,
             template,
-        } => println!(
-            "Init project from {} with template {}",
-            repository, template
-        ),
-        SubCommand::Update {} => println!("Update project"),
+        } => setup(repository, template),
+        SubCommand::Update {} => update(),
     }
 }
