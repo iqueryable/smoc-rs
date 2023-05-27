@@ -1,18 +1,11 @@
 mod cli;
-mod commands;
+mod handlers;
 
 use clap::Parser;
-use cli::{Cli, Commands};
-use commands::{setup, update};
+use cli::Cli;
+use handlers::Handler;
 
 pub fn run() {
-    let args = Cli::parse();
-
-    match args.command {
-        Commands::Setup {
-            repository,
-            template,
-        } => setup(repository, template),
-        Commands::Update {} => update(),
-    }
+    let cli = Cli::parse();
+    cli.command.handle();
 }
