@@ -1,3 +1,3 @@
-fn main() {
-    smoc_rs::run();
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    smoc_rs::run()
 }
