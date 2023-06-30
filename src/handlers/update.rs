@@ -1,6 +1,9 @@
 use std::{fs, process::Command};
 
-use crate::{config::ProjectConfig, template};
+use crate::{
+    config::ProjectConfig,
+    template::{self, repo},
+};
 
 pub fn handle() -> Result<(), Box<dyn std::error::Error>> {
     println!("Update project");
@@ -15,7 +18,15 @@ pub fn handle() -> Result<(), Box<dyn std::error::Error>> {
         .status()
         .unwrap();
     // map templates variables
-    // run templates in temporary repository
+    // render the current revision if any
+    // render latest revision
+    for template_config in config.templates.iter() {
+        let repository = &template_config.repository;
+        let template = &template_config.template;
+        repo::install(repository);
+        let repo_folder = repo::get_install_dir(repository).unwrap();
+        template::render(template, &repo_folder, &template_config.vars)
+    }
     // update config file
     // merge change revision into working directory
     Ok(())
