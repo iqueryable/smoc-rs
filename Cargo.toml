@@ -7,3 +7,7 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "4.2.5", features = ["derive"] }
+convert_case = "0.6.0"
+handlebars = "4.3.7"
+serde = { version = "1.0.164", features = ["derive"] }
+toml = "0.7.5"
