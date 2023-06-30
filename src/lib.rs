@@ -1,6 +1,7 @@
 mod cli;
 mod config;
 mod handlers;
+mod project;
 mod template;
 
 use clap::Parser;

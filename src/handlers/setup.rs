@@ -2,6 +2,7 @@ use std::path::Path;
 
 use crate::{
     config::{ProjectConfig, Template, TemplateConfig},
+    project,
     template::repo,
 };
 
@@ -10,6 +11,8 @@ pub fn handle(repository: &String, template: &String) -> Result<(), Box<dyn std:
         "Init project from {} with template {}",
         repository, template
     );
+    // initialize project folder
+    project::init().unwrap();
     // ensure config does not exist
     // install templates from repository
     repo::install(&repository);
